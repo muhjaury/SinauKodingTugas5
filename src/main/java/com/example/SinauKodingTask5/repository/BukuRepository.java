@@ -2,9 +2,11 @@ package com.example.SinauKodingTask5.repository;
 
 import com.example.SinauKodingTask5.entity.Buku;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface BukuRepository extends JpaRepository<Buku, Integer> {
-    List<Buku> findByNamaOrPenulisContaining(String nama, String penulis);
+    List<Buku> findByJudulContainingAndPenulisContaining(String judul, String penulis);
 }

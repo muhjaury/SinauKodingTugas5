@@ -1,8 +1,10 @@
 package com.example.SinauKodingTask5.controller;
 
 import com.example.SinauKodingTask5.entity.Anggota;
+import com.example.SinauKodingTask5.response.Response;
 import com.example.SinauKodingTask5.service.AnggotaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class AnggotaController {
 
     //Read
     @GetMapping
-    public List<Anggota> selectAllAnggota(){
-        return anggotaService.selectAllAnggota();
+    public Response selectAllAnggota(){
+        return new Response(anggotaService.selectAllAnggota(), "Data berhasil ditampilkan", HttpStatus.OK);
     }
 
     @GetMapping(value="findNama")

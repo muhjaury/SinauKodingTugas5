@@ -1,8 +1,10 @@
 package com.example.SinauKodingTask5.controller;
 
 import com.example.SinauKodingTask5.entity.Buku;
+import com.example.SinauKodingTask5.response.Response;
 import com.example.SinauKodingTask5.service.BukuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,13 +24,13 @@ public class BukuController {
 
     //Read
     @GetMapping
-    public List<Buku> findAllBuku(){
-        return bukuService.findAllBuku();
+    public Response findAllBuku(){
+        return new Response(bukuService.findAllBuku(),"Data berhasil ditampilkan", HttpStatus.OK);
     }
 
-    @GetMapping(value = "np")
-    public List<Buku> findByNamaOrPenulisContaining(@RequestParam(value = "nama", required = false) String nama, @RequestParam(value = "penulis", required = false) String penulis){
-        return bukuService.findByNamaOrPenulis(nama,penulis);
+    @GetMapping(value = "jp")
+    public List<Buku> findByJudulContainingAndPenulisContaining(@RequestParam(value = "judul", required = false) String judul, @RequestParam(value = "penulis", required = false) String penulis){
+        return bukuService.findByJudulContainingAndPenulisContaining(judul, penulis);
     }
 
     //Update
@@ -39,7 +41,11 @@ public class BukuController {
 
     //Delete
     @DeleteMapping(value = "{id}")
-    public Boolean deleteBukuById(@PathVariable int id){
-        return bukuService.deleteBukuById(id);
+    public String deleteBukuById(@PathVariable int id){
+        if(bukuService.deleteBukuById(id)){
+            return "Data berhasil dihapus";
+        }else{
+            return "Data gagal dihapus";
+        }
     }
 }

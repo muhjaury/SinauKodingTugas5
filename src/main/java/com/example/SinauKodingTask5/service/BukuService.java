@@ -1,12 +1,12 @@
 package com.example.SinauKodingTask5.service;
 
-import com.example.SinauKodingTask5.entity.Anggota;
 import com.example.SinauKodingTask5.entity.Buku;
 import com.example.SinauKodingTask5.repository.BukuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class BukuService {
 
     @Autowired
@@ -22,8 +22,8 @@ public class BukuService {
         return bukuRepository.findAll();
     }
 
-    public List<Buku> findByNamaOrPenulis(String nama, String penulis){
-        return bukuRepository.findByNamaOrPenulisContaining(nama,penulis);
+    public List<Buku> findByJudulContainingAndPenulisContaining(String judul, String penulis){
+        return bukuRepository.findByJudulContainingAndPenulisContaining(judul, penulis);
     }
 
     //Update
