@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "da5c3142-50d9-4b77-87fc-c39e22fd6ce5",
+		"name": "SinauKodingTask5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Anggota",
+			"item": [
+				{
+					"name": "Create Anggota",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\":\"Anggota 5\",\r\n    \"alamat\":\"Alamat 5\",\r\n    \"noTelp\":\"Nomor Telfon 5\",\r\n    \"tglLahir\":\"2022-06-05\",\r\n    \"jenisKelamin\":\"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/anggota",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"anggota"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select All Anggota",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/anggota",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"anggota"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select By Name Anggota",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/anggota/findNama?nama=Anggota 2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"anggota",
+								"findNama"
+							],
+							"query": [
+								{
+									"key": "nama",
+									"value": "Anggota 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Anggota",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\":\"Anggota 5\",\r\n    \"alamat\":\"Alamat 5 Update\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/anggota/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"anggota",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Anggota",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/anggota/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"anggota",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Buku",
+			"item": [
+				{
+					"name": "Create Buku",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"judul\":\"Judul 3\",\r\n    \"penulis\":\"Penulis 3\",\r\n    \"penerbit\":\"Penerbit 3\",\r\n    \"tahunTerbit\":\"2022-06-03\",\r\n    \"jenisBuku\":\"Jenis 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/buku",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"buku"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select All Buku",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/buku",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"buku"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select By Judul And Penulis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/buku/jp?judul=1&penulis=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"buku",
+								"jp"
+							],
+							"query": [
+								{
+									"key": "judul",
+									"value": "1"
+								},
+								{
+									"key": "penulis",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Buku",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"judul\":\"Judul 4 Update Woi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/buku/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"buku",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Buku",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/buku/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"buku",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
