@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "anggota")
@@ -14,7 +16,7 @@ public class Anggota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_anggota")
-    private int idAnggota;
+    private Integer idAnggota;
 
     @Column(name="nama")
     private String nama;
@@ -30,4 +32,7 @@ public class Anggota {
 
     @Column(name = "jenis_kelamin")
     private String jenisKelamin;
+
+    @OneToMany(mappedBy = "anggota")
+    private List<Pinjam> pinjams = new ArrayList<>();
 }
