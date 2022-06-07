@@ -2,6 +2,8 @@ package com.example.SinauKodingTask5.service;
 
 import com.example.SinauKodingTask5.entity.Anggota;
 import com.example.SinauKodingTask5.entity.Pinjam;
+import com.example.SinauKodingTask5.repository.AnggotaRepository;
+import com.example.SinauKodingTask5.repository.BukuRepository;
 import com.example.SinauKodingTask5.repository.PinjamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,16 @@ public class PinjamService {
     @Autowired
     PinjamRepository pinjamRepository;
 
+    @Autowired
+    AnggotaRepository anggotaRepository;
+
+    @Autowired
+    BukuRepository bukuRepository;
+
     //Create
-    public Pinjam createPinjam(Pinjam pinjam){
-        return pinjamRepository.save(pinjam);
+    public Pinjam createPinjam(Pinjam param){
+        return pinjamRepository.save(param);
+
     }
 
     //Read

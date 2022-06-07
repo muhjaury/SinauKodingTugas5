@@ -1,5 +1,6 @@
 package com.example.SinauKodingTask5.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +34,6 @@ public class Anggota {
     @Column(name = "jenis_kelamin")
     private String jenisKelamin;
 
-    @OneToMany(mappedBy = "anggota")
-    private List<Pinjam> pinjams = new ArrayList<>();
+//    @OneToMany(mappedBy = "anggota", fetch = FetchType.EAGER)
+//    private List<Pinjam> pinjams = new ArrayList<>();
 }

@@ -33,6 +33,6 @@ public class Buku {
     @Column(name = "jenis_buku")
     private String jenisBuku;
 
-    @OneToMany(mappedBy = "buku")
-    private List<Pinjam> pinjams = new ArrayList<>();
+//    @OneToMany(mappedBy = "buku", fetch = FetchType.EAGER)
+//    private List<Pinjam> pinjams = new ArrayList<>();
 }

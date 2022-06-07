@@ -1,5 +1,6 @@
 package com.example.SinauKodingTask5.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,12 +17,12 @@ public class Pinjam {
     @Column(name = "id_pinjam")
     private Integer idPinjam;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_anggota", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_anggota")
     private Anggota anggota;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_buku", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_buku")
     private Buku buku;
 
     @Column(name = "tgl_pinjam")
