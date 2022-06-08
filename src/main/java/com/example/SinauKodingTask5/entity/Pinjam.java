@@ -1,6 +1,7 @@
 package com.example.SinauKodingTask5.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,12 +18,14 @@ public class Pinjam {
     @Column(name = "id_pinjam")
     private Integer idPinjam;
 
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"pinjams","handler","hibernateLazyInitializer"}
+            ,allowSetters = true)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_anggota")
     private Anggota anggota;
 
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"pinjams","handler","hibernateLazyInitializer"}
+                        ,allowSetters = true)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_buku")
     private Buku buku;
