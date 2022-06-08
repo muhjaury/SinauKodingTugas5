@@ -17,11 +17,13 @@ public class Pinjam {
     @Column(name = "id_pinjam")
     private Integer idPinjam;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_anggota")
     private Anggota anggota;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_buku")
     private Buku buku;
 

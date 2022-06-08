@@ -34,6 +34,6 @@ public class Anggota {
     @Column(name = "jenis_kelamin")
     private String jenisKelamin;
 
-//    @OneToMany(mappedBy = "anggota", fetch = FetchType.EAGER)
-//    private List<Pinjam> pinjams = new ArrayList<>();
+    @OneToMany(mappedBy = "anggota", fetch = FetchType.EAGER)
+    private List<Pinjam> pinjams = new ArrayList<>();
 }
