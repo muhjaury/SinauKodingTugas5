@@ -1,6 +1,9 @@
 package com.example.SinauKodingTask5.service;
 
 import com.example.SinauKodingTask5.entity.Pinjam;
+import com.example.SinauKodingTask5.entity.dto.PinjamDTO;
+import com.example.SinauKodingTask5.entity.dto.custom.PinjamCustomDTO;
+import com.example.SinauKodingTask5.entity.mapping.PinjamMapping;
 import com.example.SinauKodingTask5.repository.PinjamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,24 +16,25 @@ public class PinjamService {
     PinjamRepository pinjamRepository;
 
     //Create
-    public Pinjam createPinjam(Pinjam param){
-        return pinjamRepository.save(param);
+    public PinjamCustomDTO createPinjam(PinjamDTO dto){
+        Pinjam pinjam = pinjamRepository.save(PinjamMapping.INSTANCE.toEntity(dto));
+        return PinjamMapping.INSTANCE.toCustomDTO(pinjam);
 
     }
 
     //Read
-    public List<Pinjam> selectAllPinjam(){
-        return pinjamRepository.findAll();
+    public List<PinjamCustomDTO> selectAllPinjam(){
+        return PinjamMapping.INSTANCE.toPinjamCustomDTOList(pinjamRepository.findAll());
     }
 
     //Update
-    public Pinjam updatePinjamById(Pinjam pinjam, int id){
+    public PinjamCustomDTO updatePinjamById(PinjamDTO data, int id){
         Pinjam reference = pinjamRepository.findById(id).get();
-        reference.setAnggota(pinjam.getAnggota()!=null?pinjam.getAnggota():reference.getAnggota());
-        reference.setBuku(pinjam.getBuku()!=null?pinjam.getBuku():reference.getBuku());
-        reference.setTglPinjam(pinjam.getTglPinjam()!=null?pinjam.getTglPinjam():reference.getTglPinjam());
-        reference.setTglKembali(pinjam.getTglKembali()!=null?pinjam.getTglKembali():reference.getTglKembali());
-        return pinjamRepository.save(reference);
+        reference.setAnggota(data.getAnggota()!=null?data.getAnggota():reference.getAnggota());
+        reference.setBuku(data.getBuku()!=null?data.getBuku():reference.getBuku());
+        reference.setTglPinjam(data.getTglPinjam()!=null?data.getTglPinjam():reference.getTglPinjam());
+        reference.setTglKembali(data.getTglKembali()!=null?data.getTglKembali():reference.getTglKembali());
+        return PinjamMapping.INSTANCE.toCustomDTO(pinjamRepository.save(reference));
     }
 
     //Delete
@@ -42,6 +46,13 @@ public class PinjamService {
         }else{
             return false;
         }
+    }
+
+    public Integer countByIdContaining(Integer integer){
+        if(integer != null){
+            return pinjamRepository.countByIdPinjam(integer);
+        }
+        return (int) pinjamRepository.count();
     }
 
 }
