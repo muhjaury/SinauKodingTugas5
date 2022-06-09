@@ -1,6 +1,7 @@
 package com.example.SinauKodingTask5.controller;
 
 import com.example.SinauKodingTask5.entity.Anggota;
+import com.example.SinauKodingTask5.entity.dto.AnggotaDTO;
 import com.example.SinauKodingTask5.response.Response;
 import com.example.SinauKodingTask5.service.AnggotaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,33 +19,33 @@ public class AnggotaController {
 
     //Create
     @PostMapping
-    public Anggota createAnggota(@RequestBody Anggota anggota){
-        return anggotaService.createAnggota(anggota);
+    public Response createAnggota(@RequestBody AnggotaDTO data){
+        return new Response(anggotaService.createAnggota(data), "Data berhasil ditambahkan", HttpStatus.OK);
     }
 
     //Read
     @GetMapping
     public Response selectAllAnggota(){
-        return new Response(anggotaService.selectAllAnggota(), "Data berhasil ditampilkan", HttpStatus.OK);
+        return new Response(anggotaService.selectAllAnggota(), "Data berhasil ditampilkan", anggotaService.countByNamaContaining(null),HttpStatus.OK);
     }
 
     @GetMapping(value="findNama")
-    public List<Anggota> findByNama(@RequestParam(value = "nama") String string){
-        return anggotaService.findByNama(string);
+    public Response findByNama(@RequestParam(value = "nama") String string){
+        return new Response(anggotaService.findByNama(string), "Data berhasil ditambilkan", anggotaService.countByNamaContaining(string), HttpStatus.OK);
     }
 
     //Update
-    @PutMapping("/{id}")
-    public Anggota updateAnggotaById(@RequestBody Anggota param, @PathVariable int id){
-        return anggotaService.updateAnggotaById(param, id);
+    @PutMapping //Update ID in Body, not in PathVariable
+    public Response updateAnggotaById(@RequestBody Anggota param){
+        return new Response(anggotaService.updateAnggotaById(param),"Data berhasil diubah", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteAnggotaById(@PathVariable int id){
+    public Response deleteAnggotaById(@PathVariable int id){
         if(anggotaService.deleteAnggotaById(id)) {
-            return "Data berhasil dihapus";
+            return new Response(null,"Data berhasil dihapus",HttpStatus.OK);
         }else{
-            return "Data gagal dihapus";
+            return new Response(null,"Data gagal dihapus",HttpStatus.OK);
         }
     }
 

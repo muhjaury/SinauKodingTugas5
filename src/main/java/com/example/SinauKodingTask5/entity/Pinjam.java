@@ -1,6 +1,6 @@
 package com.example.SinauKodingTask5.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,9 +30,13 @@ public class Pinjam {
     @JoinColumn(name = "id_buku")
     private Buku buku;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tgl_pinjam")
     private Date tglPinjam;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tgl_kembali")
     private Date tglKembali;
 }

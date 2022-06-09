@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AnggotaRepository extends JpaRepository<Anggota,Integer> {
     List<Anggota> findByNamaContaining(String nama);
+    Integer countByNamaContaining(String nama);
 }

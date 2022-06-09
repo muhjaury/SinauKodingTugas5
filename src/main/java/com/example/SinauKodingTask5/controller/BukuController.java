@@ -1,6 +1,7 @@
 package com.example.SinauKodingTask5.controller;
 
 import com.example.SinauKodingTask5.entity.Buku;
+import com.example.SinauKodingTask5.entity.dto.BukuDTO;
 import com.example.SinauKodingTask5.response.Response;
 import com.example.SinauKodingTask5.service.BukuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +19,34 @@ public class BukuController {
 
     //Create
     @PostMapping
-    public Buku createBuku(@RequestBody Buku buku){
-        return bukuService.createBuku(buku);
+    public Response createBuku(@RequestBody BukuDTO buku){
+        return new Response(bukuService.createBuku(buku), "Data berhasil ditambahkan", HttpStatus.OK);
     }
 
     //Read
     @GetMapping
     public Response findAllBuku(){
-        return new Response(bukuService.findAllBuku(),"Data berhasil ditampilkan", HttpStatus.OK);
+        return new Response(bukuService.findAllBuku(),"Data berhasil ditampilkan", bukuService.countByJudulContaining(null), HttpStatus.OK);
     }
 
     @GetMapping(value = "jp")
-    public List<Buku> findByJudulContainingAndPenulisContaining(@RequestParam(value = "judul", required = false) String judul, @RequestParam(value = "penulis", required = false) String penulis){
-        return bukuService.findByJudulContainingAndPenulisContaining(judul, penulis);
+    public Response findByJudulContainingAndPenulisContaining(@RequestParam(value = "judul", required = false) String judul, @RequestParam(value = "penulis", required = false) String penulis){
+        return new Response(bukuService.findByJudulContainingAndPenulisContaining(judul, penulis), "Data berhasil ditampilkan", bukuService.countByJudulContainingAndPenulisContaining(judul,penulis), HttpStatus.OK);
     }
 
-    //Update
+//    Update
     @PutMapping(value = "{id}")
-    public Buku updateBukuById(@RequestBody Buku buku, @PathVariable int id){
-        return bukuService.updateBukuById(buku, id);
+    public Response updateBukuById(@RequestBody BukuDTO buku, @PathVariable int id){
+        return new Response(bukuService.updateBukuById(buku, id),"Data berhasil diubah",HttpStatus.OK);
     }
 
     //Delete
     @DeleteMapping(value = "{id}")
-    public String deleteBukuById(@PathVariable int id){
+    public Response deleteBukuById(@PathVariable int id){
         if(bukuService.deleteBukuById(id)){
-            return "Data berhasil dihapus";
+            return new Response(null,"Data berhasil dihapus",HttpStatus.OK);
         }else{
-            return "Data gagal dihapus";
+            return new Response(null,"Data gagal dihapus",HttpStatus.OK);
         }
     }
 }

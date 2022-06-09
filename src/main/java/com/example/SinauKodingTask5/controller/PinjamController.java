@@ -29,10 +29,10 @@ public class PinjamController {
     }
 
     //Update
-    @PutMapping("/{id}")
-    public Pinjam updatePinjamById(@RequestBody Pinjam param, @PathVariable int id){
-        return pinjamService.updatePinjamById(param, id);
-    }
+//    @PutMapping("/{id}")
+//    public Pinjam updatePinjamById(@RequestBody Pinjam param, @PathVariable int id){
+//        return pinjamService.updatePinjamById(param, id);
+//    }
 
     //Delete
     @DeleteMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.example.SinauKodingTask5.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,8 @@ public class Anggota {
     @Column(name = "no_telp")
     private String noTelp;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tgl_lahir")
     private Date tglLahir;
 

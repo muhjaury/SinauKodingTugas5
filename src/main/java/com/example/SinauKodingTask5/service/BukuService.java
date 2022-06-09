@@ -1,6 +1,8 @@
 package com.example.SinauKodingTask5.service;
 
 import com.example.SinauKodingTask5.entity.Buku;
+import com.example.SinauKodingTask5.entity.dto.BukuDTO;
+import com.example.SinauKodingTask5.entity.mapping.BukuMapping;
 import com.example.SinauKodingTask5.repository.BukuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,28 +15,29 @@ public class BukuService {
     BukuRepository bukuRepository;
 
     //Create
-    public Buku createBuku(Buku buku){
-        return bukuRepository.save(buku);
+    public BukuDTO createBuku(BukuDTO data){
+        Buku buku = bukuRepository.save(BukuMapping.INSTANCE.toEntity(data));
+        return BukuMapping.INSTANCE.toDTO(buku);
     }
 
     //Read
-    public List<Buku> findAllBuku(){
-        return bukuRepository.findAll();
+    public List<BukuDTO> findAllBuku(){
+        return BukuMapping.INSTANCE.toBukuDTOList(bukuRepository.findAll());
     }
 
-    public List<Buku> findByJudulContainingAndPenulisContaining(String judul, String penulis){
-        return bukuRepository.findByJudulContainingAndPenulisContaining(judul, penulis);
+    public List<BukuDTO> findByJudulContainingAndPenulisContaining(String judul, String penulis){
+        return BukuMapping.INSTANCE.toBukuDTOList(bukuRepository.findByJudulContainingAndPenulisContaining(judul, penulis));
     }
 
     //Update
-    public Buku updateBukuById(Buku buku, int id){
+    public BukuDTO updateBukuById(BukuDTO data, int id){
         Buku reference = bukuRepository.findById(id).get();
-        reference.setJudul(buku.getJudul()!=null?buku.getJudul():reference.getJudul());
-        reference.setPenulis(buku.getPenulis()!=null?buku.getPenulis():reference.getPenulis());
-        reference.setPenerbit(buku.getPenerbit()!=null?buku.getPenerbit():reference.getPenerbit());
-        reference.setTahunTerbit(buku.getTahunTerbit()!=null?buku.getTahunTerbit():reference.getTahunTerbit());
-        reference.setJenisBuku(buku.getJenisBuku()!=null?buku.getJenisBuku():reference.getJenisBuku());
-        return bukuRepository.save(reference);
+        reference.setJudul(data.getJudul()!=null?data.getJudul():reference.getJudul());
+        reference.setPenulis(data.getPenulis()!=null?data.getPenulis():reference.getPenulis());
+        reference.setPenerbit(data.getPenerbit()!=null?data.getPenerbit():reference.getPenerbit());
+        reference.setTahunTerbit(data.getTahunTerbit()!=null?data.getTahunTerbit():reference.getTahunTerbit());
+        reference.setJenisBuku(data.getJenisBuku()!=null?data.getJenisBuku():reference.getJenisBuku());
+        return BukuMapping.INSTANCE.toDTO(bukuRepository.save(reference));
     }
 
     //Delete
@@ -46,5 +49,19 @@ public class BukuService {
         }else{
             return false;
         }
+    }
+
+    public Integer countByJudulContaining(String string){
+        if(string != null){
+            return bukuRepository.countByJudulContaining(string);
+        }
+        return (int) bukuRepository.count();
+    }
+
+    public Integer countByJudulContainingAndPenulisContaining(String string, String judul){
+        if(string != null){
+            return bukuRepository.countByJudulContainingAndPenulisContaining(string, judul);
+        }
+        return (int) bukuRepository.count();
     }
 }

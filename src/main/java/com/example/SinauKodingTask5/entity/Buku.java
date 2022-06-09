@@ -1,5 +1,6 @@
 package com.example.SinauKodingTask5.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,8 @@ public class Buku {
     @Column(name = "penerbit")
     private String penerbit;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tahun_terbit")
     private Date tahunTerbit;
 
