@@ -29,6 +29,11 @@ public class PinjamController {
         return new Response(pinjamService.selectAllPinjam(), "Data berhasil ditampilkan", pinjamService.countByIdContaining(null), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public Response findByIdPinjam(@RequestParam Integer id){
+        return new Response(pinjamService.findByIdPinjam(id), "Data berhasil ditampilkan", pinjamService.countByIdContaining(id), HttpStatus.OK);
+    }
+
     //Update
     @PutMapping("/{id}")
     public Response updatePinjamById(@RequestBody PinjamDTO param, @PathVariable int id){

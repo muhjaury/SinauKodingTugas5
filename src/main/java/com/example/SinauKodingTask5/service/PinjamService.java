@@ -3,12 +3,14 @@ package com.example.SinauKodingTask5.service;
 import com.example.SinauKodingTask5.entity.Pinjam;
 import com.example.SinauKodingTask5.entity.dto.PinjamDTO;
 import com.example.SinauKodingTask5.entity.dto.custom.PinjamCustomDTO;
+import com.example.SinauKodingTask5.entity.dto.custom.PinjamCustomDTOWithId;
 import com.example.SinauKodingTask5.entity.mapping.PinjamMapping;
 import com.example.SinauKodingTask5.repository.PinjamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PinjamService {
@@ -25,6 +27,10 @@ public class PinjamService {
     //Read
     public List<PinjamCustomDTO> selectAllPinjam(){
         return PinjamMapping.INSTANCE.toPinjamCustomDTOList(pinjamRepository.findAll());
+    }
+
+    public List<PinjamCustomDTOWithId> findByIdPinjam(Integer id){
+        return PinjamMapping.INSTANCE.toPinjamCustomDTOWithIdList(pinjamRepository.findByIdPinjam(id));
     }
 
     //Update
